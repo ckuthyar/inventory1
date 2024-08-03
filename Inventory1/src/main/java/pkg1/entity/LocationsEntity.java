@@ -1,7 +1,10 @@
 package pkg1.entity;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 @Entity
@@ -13,6 +16,9 @@ public class LocationsEntity {
 	private String location_name;
 	private String country_code;
 	private String pincode;
+	
+	@OneToMany(mappedBy="locationEntity")
+	private List<Inv_BranchEntity> list1;
 	public long getId() {
 		return id;
 	}
