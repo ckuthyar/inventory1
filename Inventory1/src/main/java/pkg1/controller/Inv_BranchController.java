@@ -34,20 +34,15 @@ public class Inv_BranchController {
 		Inv_BranchEntity saved_branch=new Inv_BranchEntity();  //created the empty object
 		saved_branch.setBranch_name(inv_branchdto.getInv_BranchEntity().getBranch_name());  //added one field
 		
-		
 		long cid=inv_branchdto.getCompany_id();
 		Inv_CompanyEntity company_obj=inv_companyrepo.findById(cid).orElseThrow(()->new NullPointerException("company id "+cid+" not present"));
+		saved_branch.setInv_CompanyEntity(company_obj);    //added FK object
 		
 		long lid=inv_branchdto.getLocation_id();
 		LocationsEntity location_obj=locationsrepo.findById(lid).orElseThrow(()->new NullPointerException("location id "+lid+" not present"));
-		
-		saved_branch.setInv_CompanyEntity(company_obj);    //added FK object
 		saved_branch.setLocationEntity(location_obj);   //added FK object
 		
-		
-		
 		inv_branchrepo.save(saved_branch);  //added to database
-		
 		return ResponseEntity.ok(saved_branch);
 	}
 	@GetMapping("/branches/view")
